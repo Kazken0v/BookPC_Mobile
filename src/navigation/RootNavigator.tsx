@@ -1,5 +1,6 @@
 import React from "react";
 import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useAuth } from "../context/AuthContext";
@@ -42,6 +43,40 @@ function MainTabs() {
   );
 }
 
+function SafeScreen({ children }: { children: React.ReactNode }) {
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.bgDeep }} edges={["top", "left", "right"]}>
+      {children}
+    </SafeAreaView>
+  );
+}
+
+const AuthScreenSafe = () => (
+  <SafeScreen>
+    <AuthScreen />
+  </SafeScreen>
+);
+const MainTabsSafe = () => (
+  <SafeScreen>
+    <MainTabs />
+  </SafeScreen>
+);
+const ClubProfileSafe = () => (
+  <SafeScreen>
+    <ClubProfileScreen />
+  </SafeScreen>
+);
+const BookingSafe = () => (
+  <SafeScreen>
+    <BookingScreen />
+  </SafeScreen>
+);
+const PaymentSafe = () => (
+  <SafeScreen>
+    <PaymentScreen />
+  </SafeScreen>
+);
+
 export function RootNavigator() {
   const { isAuthenticated, loading } = useAuth();
 
@@ -54,13 +89,13 @@ export function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.bg } }}>
       {!isAuthenticated ? (
-        <Stack.Screen name="Auth" component={AuthScreen} />
+        <Stack.Screen name="Auth" component={AuthScreenSafe} />
       ) : (
         <>
-          <Stack.Screen name="Main" component={MainTabs} />
-          <Stack.Screen name="ClubProfile" component={ClubProfileScreen} />
-          <Stack.Screen name="Booking" component={BookingScreen} />
-          <Stack.Screen name="Payment" component={PaymentScreen} />
+          <Stack.Screen name="Main" component={MainTabsSafe} />
+          <Stack.Screen name="ClubProfile" component={ClubProfileSafe} />
+          <Stack.Screen name="Booking" component={BookingSafe} />
+          <Stack.Screen name="Payment" component={PaymentSafe} />
         </>
       )}
     </Stack.Navigator>
