@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Cofou",
+    "slug": "cofou",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/cofou.jpeg",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cofou.app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2ba24178-9c11-46a3-a328-68cc402aecb1"
+      }
+    },
+    "owner": "johan_zaebal"
+  }
+}
